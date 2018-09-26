@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>android px to dp</title>
+    <style>
+        .top {
+            margin-top: 10%;
+            margin-left: 5%;
+        }
+
+        .top input {
+            margin-left: 8%;
+            height: 20px;
+            width: 100px;
+        }
+
+    </style>
+</head>
+<body>
+<div class="top">
+    像素转换成DP工具:
+    <div>
+        <input type="text" id="px_input" value="" />px 转换后: <input type="text" readonly="readonly" id="dp_input">dp <input data-clipboard-target="#dp_input" type="button" id="btn_copy" value="拷贝"/>
+    </div>
+</div>
+<script type="text/javascript" src="dist/clipboard.js"></script>
+<script type="text/javascript">
+    var pxInput = document.getElementById("px_input");
+    pxInput.onchange = function () {
+        transform();
+    };
+
+    pxInput.onblur = function () {
+        transform();
+    };
+
+    pxInput.onkeyup = function () {
+        transform();
+    };
+
+    function transform () {
+        var px = parseInt(pxInput.value);
+        if (isNaN(px)) {
+            px = 0;
+        }
+
+        document.getElementById("dp_input").value = px * 0.869565 / 3;
+    }
+
+    var clipboard = new ClipboardJS(document.getElementById('btn_copy'));
+    clipboard.on("success", function () {
+        e.clearSelection();
+    });
+    clipboard.on("error", function () {
+        window.alert("复制失败!");
+    });
+
+</script>
+</body>
+</html>
