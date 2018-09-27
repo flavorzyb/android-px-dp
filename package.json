@@ -1,0 +1,54 @@
+{
+  "name": "android-px-dp",
+  "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:flavorzyb/android-px-dp.git"
+  },
+  "license": "MIT",
+  "description": "android px to dp html",
+  "author": "Yanbin Zhu<haker-haker@163.com>",
+  "private": true,
+  "scripts": {
+    "dev": "cross-env BABEL_ENV=development NODE_ENV=development webpack-dev-server",
+    "start": "cross-env BABEL_ENV=development NODE_ENV=development webpack",
+    "build": "cross-env BABEL_ENV=production NODE_ENV=production webpack"
+  },
+  "dependencies": {
+    "clipboard": "^2.0.1",
+    "jquery": "^3.3.1",
+    "primer": "^10.8.1"
+  },
+  "devDependencies": {
+    "babel-loader": "^7.1.4",
+    "babel-minify-webpack-plugin": "^0.3.1",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.7.0",
+    "clean-webpack-plugin": "^0.1.19",
+    "copy-webpack-plugin": "^4.5.1",
+    "cross-env": "^5.1.6",
+    "css-loader": "^0.28.11",
+    "cssnano": "^4.1.4",
+    "exports-loader": "^0.7.0",
+    "expose-loader": "^0.7.5",
+    "extract-loader": "^2.0.1",
+    "favicons-webpack-plugin": "^0.0.9",
+    "file-loader": "^1.1.11",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^3.2.0",
+    "mini-css-extract-plugin": "^0.4.0",
+    "optimize-css-assets-webpack-plugin": "^4.0.2",
+    "postcss-loader": "^2.1.5",
+    "raw-loader": "^0.5.1",
+    "style-loader": "^0.21.0",
+    "transfer-webpack-plugin": "^0.1.4",
+    "uglifyjs-webpack-plugin": "^1.2.5",
+    "url-loader": "^1.0.1",
+    "webpack": "^4.10.2",
+    "webpack-cli": "^3.0.3",
+    "webpack-closure-compiler": "^2.1.6",
+    "webpack-dev-middleware": "^3.1.3",
+    "webpack-dev-server": "^3.1.4",
+    "webpack-merge": "^4.1.2"
+  }
+}

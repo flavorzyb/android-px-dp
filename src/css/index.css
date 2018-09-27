@@ -1,0 +1,10 @@
+.top {
+    margin-top: 10%;
+    margin-left: 5%;
+}
+
+.top input {
+    margin-left: 8%;
+    height: 20px;
+    width: 100px;
+}
