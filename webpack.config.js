@@ -20,7 +20,7 @@ const config = {
     output: {
         filename: 'js/[name]_[hash].js',
         path: path.join(__dirname, "dist"),
-        publicPath: "/",
+        publicPath: "/px/",
     },
 
     externals: {
@@ -88,7 +88,7 @@ if (env === "development") {
         inline: true,
         noInfo: false,
         open: true,
-        openPage: 'index.html',
+        openPage: 'px/index.html',
         disableHostCheck: true,
     };
 
