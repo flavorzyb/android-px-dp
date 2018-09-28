@@ -1,0 +1,19 @@
+{
+    "asi": true,
+    "browser": true,
+    "node": true,
+    "jquery": true,
+    "esnext": true,
+    "strict": false,
+    "globalstrict": true,
+    "quotmark": true,
+    "undef": true,
+    "unused": true,
+    "scripturl": true,
+    "globals": {
+        "define": false,
+        "module": true,
+        "export": true,
+        "console": false
+    }
+}

@@ -11,36 +11,43 @@ const env = process.env.NODE_ENV;
 
 const config = {
     mode: env,
-    entry: path.resolve(__dirname, "src/js/index.js"),
+    context: __dirname,
+    optimization: {
+        minimize: true,
+        minimizer: [],
+    },
+    entry: [path.join(__dirname, "src/js/index.js")],
     output: {
-        filename: "js/index.js",
+        filename: 'js/[name]_[hash].js',
+        path: path.join(__dirname, "dist"),
         publicPath: "/",
     },
 
     plugins: [
         new webpack.HashedModuleIdsPlugin(),
+
         new MiniCssExtractPlugin({
             filename: 'css/[hash:2]/[hash:4]/[hash].css',
             chunkFilename:'css/[hash:2]/[hash:4]/[hash]_[id].css'
         }),
         new HtmlWebpackPlugin({
-           filename: "index.html",
-            template: path.resolve(__dirname, "src/index.html"),
+            filename: "index.html",
+            template: path.join(__dirname, "src/index.html"),
         }),
     ],
     module: {
         rules: [
             {
                 test: /\.js$/,
-                include: [path.resolve(__dirname, "node_modules")],
+                include: [path.join(__dirname, "node_modules")],
                 use: [
                     {loader: 'file-loader', options: {name: 'js/[hash:2]/[hash:4]/[name]_[hash].[ext]'}},
-                    {loader: 'babel-loader',},
+                    {loader: 'babel-loader'},
                 ],
             },
             {
                 test: /\.js$/,
-                include: [path.resolve(__dirname, 'src/js')],
+                include: [path.join(__dirname, 'src/js')],
                 use: [
                     {loader: 'babel-loader'},
                 ],
@@ -73,6 +80,8 @@ if (env === "development") {
         openPage: 'index.html',
         disableHostCheck: true,
     };
+
+    config.entry = ['webpack-dev-server/client/index.js?http://localhost:8080/', path.join(__dirname, "src/js/index.js")];
     config.plugins.push(new webpack.NamedModulesPlugin());
     config.plugins.push(new webpack.HotModuleReplacementPlugin());
 } else {
@@ -86,7 +95,7 @@ if (env === "development") {
     ));
 
     config.plugins.push(new MinifyPlugin());
-    config.plugins.push(new CleanWebpackPlugin([path.resolve(__dirname, "dist")]));
+    config.plugins.push(new CleanWebpackPlugin([path.join(__dirname, "dist")]));
 }
 
 
