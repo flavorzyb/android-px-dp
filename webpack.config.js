@@ -23,12 +23,15 @@ const config = {
         publicPath: "/",
     },
 
+    externals: {
+        '$': 'jquery',
+    },
+
     plugins: [
         new webpack.HashedModuleIdsPlugin(),
-
         new MiniCssExtractPlugin({
             filename: 'css/[hash:2]/[hash:4]/[hash].css',
-            chunkFilename:'css/[hash:2]/[hash:4]/[hash]_[id].css'
+            chunkFilename:'css/[hash:2]/[hash:4]/[hash]_[id].css',
         }),
         new HtmlWebpackPlugin({
             filename: "index.html",
@@ -39,15 +42,20 @@ const config = {
         rules: [
             {
                 test: /\.js$/,
-                include: [path.join(__dirname, "node_modules")],
+                include: [
+                    path.join(__dirname, "node_modules/clipboard"),
+                    path.join(__dirname, "node_modules/popper.js"),
+                    path.join(__dirname, "node_modules/jquery"),
+                    path.join(__dirname, "node_modules/bootstrap"),
+                ],
                 use: [
                     {loader: 'file-loader', options: {name: 'js/[hash:2]/[hash:4]/[name]_[hash].[ext]'}},
-                    {loader: 'babel-loader'},
+                    {loader: 'babel-loader', options: {cacheDirectory: true}},
                 ],
             },
             {
                 test: /\.js$/,
-                include: [path.join(__dirname, 'src/js')],
+                include: [path.join(__dirname, "src/js")],
                 use: [
                     {loader: 'babel-loader'},
                 ],
@@ -55,19 +63,22 @@ const config = {
             {
                 test: /\.(html|htm)$/i,
                 use: [
-                    { loader: 'html-loader', options: {attrs: ['img:src', 'link:href', 'script:src'], interpolate: true, minifyJS: true,},},
+                    {
+                        loader: 'html-loader',
+                        options: {attrs: ['img:src', 'link:href', 'script:src'], interpolate: true, minifyJS: true,},
+                    },
                 ],
             },
             {
-                test:/\.css$/,
+                test: /\.css$/,
                 use: [
                     {loader: 'file-loader', options: {name: 'css/[hash:2]/[hash:4]/[name]_[hash].[ext]'}},
                     {loader: 'extract-loader'},
                     {loader: 'css-loader'},
                 ],
             },
-        ]
-    }
+        ],
+    },
 };
 
 if (env === "development") {
@@ -97,7 +108,6 @@ if (env === "development") {
     config.plugins.push(new MinifyPlugin());
     config.plugins.push(new CleanWebpackPlugin([path.join(__dirname, "dist")]));
 }
-
 
 
 module.exports = config;
